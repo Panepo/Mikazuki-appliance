@@ -31,7 +31,9 @@ const App = (props: Props) => {
     <div className={props.classes.root}>
       <Header />
       <Ribbon />
-      <div className={props.classes.content}><Content /></div>
+      <div className={props.classes.content}>
+        <Content />
+      </div>
       <Footer />
     </div>
   )

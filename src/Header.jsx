@@ -121,7 +121,7 @@ class Header extends React.Component<ProvidedProps & Props, State> {
               color="inherit"
               className={classes.grow}
               noWrap>
-              Mochizuki
+              Mikazuki
             </Typography>
           </Toolbar>
         </AppBar>
