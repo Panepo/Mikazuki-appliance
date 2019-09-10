@@ -7,8 +7,9 @@ import cors from 'cors'
 import dayjs from 'dayjs'
 import 'dayjs/locale/zh-tw'
 
+import textRoutes from './routes/text.route'
+
 import logger from './services/logger.service'
-// import { dataFolder } from './services/storage.service'
 
 const app = express()
 
@@ -21,12 +22,7 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
 app.use(bodyParser.json({ limit: '50mb', extended: true }))
 
 // ROUTES
-/*
-app.use('/auth', authRoutes)
-app.use('/data', dataRoutes)
-app.use('/face', peopleRoutes)
-app.use('/face', faceRoutes)
-*/
+app.use('/text', textRoutes)
 
 // DATA ROUTE
 // app.use('/data', express.static(dataFolder))

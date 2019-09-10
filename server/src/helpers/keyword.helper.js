@@ -1,6 +1,6 @@
 export const isKeyword = (tokens, template) => {
   let result = false
-  tokens.foreach(token => {
+  tokens.forEach(token => {
     if (token.tag === 'eng') {
       template.eng.forEach(word => {
         if (token.word === word) {

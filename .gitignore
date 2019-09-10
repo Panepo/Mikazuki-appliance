@@ -25,3 +25,4 @@ yarn-error.log*
 
 /archive/
 */flow-typed/*
+node_modules

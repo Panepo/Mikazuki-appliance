@@ -59,7 +59,7 @@ class Content extends React.Component<Props, State> {
   handleTextInput = () => event => {
     this.setState({
       text: {
-        input: event.target.value,
+        input: event.target.value
       }
     })
   }
