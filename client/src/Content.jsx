@@ -7,8 +7,7 @@ import { withStyles, withWidth } from '@material-ui/core'
 import { isSmartphone } from './helpers/responsive.helper'
 import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
-
-import taskAppliance from './template/appliance.task'
+import axios from 'axios'
 
 import floorGreen from './images/floor-green.svg'
 import floorWhite from './images/floor-white.svg'
@@ -23,7 +22,7 @@ const styles = (theme: Object) => ({
     width: '100%'
   },
   formControl: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing(1),
     width: '95%'
   }
 })
@@ -45,15 +44,21 @@ type State = {
 }
 
 class Content extends React.Component<Props, State> {
-  state = {
-    appliance: {
-      floor: 'off',
-      desk: 'off'
-    },
-    text: {
-      input: '',
-      output: ''
+  constructor(props) {
+    super(props)
+    this.state = {
+      appliance: {
+        floor: 'off',
+        desk: 'off'
+      },
+      text: {
+        input: '',
+        output: ''
+      }
     }
+
+    this.handleTextInput = this.handleTextInput.bind(this)
+    this.handleKeyDown = this.handleKeyDown.bind(this)
   }
 
   handleTextInput = () => event => {
@@ -66,13 +71,165 @@ class Content extends React.Component<Props, State> {
 
   handleKeyDown = () => event => {
     if (event.key === 'Enter') {
+      event.preventDefault()
       const message = this.state.text.input
-      const caseAppliance = taskAppliance(message)
-      this.setState({
-        text: {
-          output: caseAppliance
-        }
-      })
+      axios
+        .post('/text/analysis', { text: message })
+        .then(res => {
+          console.log(res.data.anwser)
+          this.handleAppliance(res.data.anwser)
+        })
+        .catch(err => console.log(err))
+    }
+  }
+
+  handleAppliance = caseAppliance => {
+    switch (caseAppliance) {
+      case 'all_on_white':
+        this.setState({
+          appliance: {
+            floor: 'white',
+            desk: 'white'
+          },
+          text: {
+            output: 'Okay, all lights are swtich to white.'
+          }
+        })
+        break
+      case 'all_on_green':
+        this.setState({
+          appliance: {
+            floor: 'green',
+            desk: 'green'
+          },
+          text: {
+            output: 'Okay, all lights are swtich to green.'
+          }
+        })
+        break
+      case 'all_on_none':
+        this.setState({
+          appliance: {
+            floor: 'white',
+            desk: 'white'
+          },
+          text: {
+            output: 'Okay, all lights are turned on.'
+          }
+        })
+        break
+      case 'all_off_white':
+      case 'all_off_green':
+      case 'all_off_none':
+        this.setState({
+          appliance: {
+            floor: 'off',
+            desk: 'off'
+          },
+          text: {
+            output: 'Okay, all lights are turned off.'
+          }
+        })
+        break
+      case 'left_on_white':
+        this.setState({
+          appliance: {
+            ...this.state.appliance,
+            desk: 'white'
+          },
+          text: {
+            output: 'Okay, desk light is switch to white.'
+          }
+        })
+        break
+      case 'left_on_green':
+        this.setState({
+          appliance: {
+            ...this.state.appliance,
+            desk: 'green'
+          },
+          text: {
+            output: 'Okay, desk light is switch to green.'
+          }
+        })
+        break
+      case 'left_on_none':
+        this.setState({
+          appliance: {
+            ...this.state.appliance,
+            desk: 'white'
+          },
+          text: {
+            output: 'Okay, desk light is turned on.'
+          }
+        })
+        break
+      case 'left_off_white':
+      case 'left_off_green':
+      case 'left_off_none':
+        this.setState({
+          appliance: {
+            ...this.state.appliance,
+            desk: 'off'
+          },
+          text: {
+            output: 'Okay, desk light is turned off.'
+          }
+        })
+        break
+      case 'right_on_white':
+        this.setState({
+          appliance: {
+            ...this.state.appliance,
+            floor: 'white'
+          },
+          text: {
+            output: 'Okay, floor lamp is switch to white.'
+          }
+        })
+        break
+      case 'right_on_green':
+        this.setState({
+          appliance: {
+            ...this.state.appliance,
+            floor: 'green'
+          },
+          text: {
+            output: 'Okay, floor lamp is switch to green.'
+          }
+        })
+        break
+      case 'right_on_none':
+        this.setState({
+          appliance: {
+            ...this.state.appliance,
+            floor: 'white'
+          },
+          text: {
+            output: 'Okay, floor lamp is turned on.'
+          }
+        })
+        break
+      case 'right_off_white':
+      case 'right_off_green':
+      case 'right_off_none':
+        this.setState({
+          appliance: {
+            ...this.state.appliance,
+            floor: 'off'
+          },
+          text: {
+            output: 'Okay, floor lamp is turned off.'
+          }
+        })
+        break
+      default:
+        this.setState({
+          text: {
+            output: 'I do not understand your command, give me a clear one, thanks :)'
+          }
+        })
+        break
     }
   }
 
@@ -109,10 +266,10 @@ class Content extends React.Component<Props, State> {
               <TextField
                 className={this.props.classes.formControl}
                 id="text-input"
-                label="Text Command"
+                label="Your Command"
                 margin="normal"
-                value={this.state.text.input}
-                onInput={this.handleTextInput()}
+                value={this.state.text.input || ''}
+                onChange={this.handleTextInput()}
                 onKeyDown={this.handleKeyDown()}
               />
               <TextField
@@ -120,7 +277,7 @@ class Content extends React.Component<Props, State> {
                 id="text-output"
                 label="Mikazuki anwsers"
                 margin="normal"
-                value={this.state.text.output}
+                value={this.state.text.output || ''}
               />
             </Paper>
           </Grid>

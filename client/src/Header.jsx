@@ -24,7 +24,7 @@ const styles = (theme: Object) => ({
     position: 'relative'
   },
   button: {
-    margin: theme.spacing.unit
+    margin: theme.spacing(1)
   },
   drawer: {
     color: '#616161'

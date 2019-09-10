@@ -6,7 +6,7 @@ const templateGreen = {
   thre: 0.8
 }
 
-const templateYellow = {
+const templateWhite = {
   cht: ['白'],
   eng: ['white'],
   thre: 0.8
@@ -19,6 +19,6 @@ const templateYellow = {
 */
 export const checkColor = tokens => {
   const green = isKeyword(tokens, templateGreen)
-  const yellow = isKeyword(tokens, templateYellow)
-  return yellow ? 'white' : green ? 'green' : 'none'
+  const white = isKeyword(tokens, templateWhite)
+  return white ? 'white' : green ? 'green' : 'none'
 }
