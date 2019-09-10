@@ -1,0 +1,32 @@
+{
+  "name": "mikazuki-appliance",
+  "version": "1.0.0",
+  "description": "Demo application for Mikazuki",
+  "author": "Panepo <panepo@github.io>",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"yarn server\" \"yarn client\"",
+    "server": "cd server && yarn start",
+    "client": "cd client && yarn start",
+    "database": "mongod --dbpath=./db --smallfiles",
+    "lint": "concurrently \"yarn lint-server\" \"yarn lint-client\"",
+    "lint-server": "cd server && yarn lint",
+    "lint-client": "cd client && yarn lint",
+    "prettier": "concurrently \"yarn prettier-server\" \"yarn prettier-client\"",
+    "prettier-server": "cd server && yarn prettier",
+    "prettier-client": "cd client && yarn prettier",
+    "precommit": "yarn prettier && git add"
+  },
+  "lint-staged": {
+    "*": [
+      "yarn prettier",
+      "git add"
+    ]
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.1",
+    "husky": "^3.0.3",
+    "lint-staged": "^9.2.1"
+  }
+}
