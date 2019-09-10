@@ -1,0 +1,48 @@
+{
+  "name": "mikazuki-appliance-server",
+  "version": "0.1.0",
+  "description": "Demo application for Mikazuki",
+  "main": "index.js",
+  "private": true,
+  "author": "Panepo <panepo@github.io>",
+  "homepage": "https://panepo.github.io/Mikazuki-appliance",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Panepo/Mikazuki-appliance.git"
+  },
+  "scripts": {
+    "test": "jest --config ./jest.config.json --forceExit --verbose false",
+    "start": "SET NODE_ENV=development && nodemon src/index.js",
+    "lint": "eslint src/**/*.{js,jsx}",
+    "prettier": "prettier --single-quote --no-semi --trailing-comma none --write \"src/**/*.{js,jsx}\""
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "core-js": "^3.2.1",
+    "cors": "^2.8.5",
+    "dayjs": "^1.8.16",
+    "express": "^4.17.1",
+    "natural": "^0.6.3",
+    "nodejieba": "^2.3.1",
+    "regenerator-runtime": "^0.13.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/register": "^7.0.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.15.1",
+    "eslint-config-google": "^0.12.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "nodemon": "^1.18.10",
+    "prettier": "^1.16.4"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "test/*",
+      "docs/*",
+      "src/clinet/*"
+    ]
+  }
+}
