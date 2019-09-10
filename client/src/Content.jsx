@@ -6,6 +6,9 @@ import Paper from '@material-ui/core/Paper'
 import { withStyles, withWidth } from '@material-ui/core'
 import { isSmartphone } from './helpers/responsive.helper'
 import Grid from '@material-ui/core/Grid'
+import TextField from '@material-ui/core/TextField'
+
+import taskAppliance from './template/appliance.task'
 
 import floorGreen from './images/floor-green.svg'
 import floorWhite from './images/floor-white.svg'
@@ -18,6 +21,10 @@ const styles = (theme: Object) => ({
   root: {
     flexGrow: 1,
     width: '100%'
+  },
+  formControl: {
+    margin: theme.spacing.unit,
+    width: '95%'
   }
 })
 
@@ -49,7 +56,27 @@ class Content extends React.Component<Props, State> {
     }
   }
 
-  renderFloor() {
+  handleTextInput = () => event => {
+    this.setState({
+      text: {
+        input: event.target.value,
+      }
+    })
+  }
+
+  handleKeyDown = () => event => {
+    if (event.key === 'Enter') {
+      const message = this.state.text.input
+      const caseAppliance = taskAppliance(message)
+      this.setState({
+        text: {
+          output: caseAppliance
+        }
+      })
+    }
+  }
+
+  renderFloor = () => {
     if (this.state.appliance.floor === 'off') {
       return <img src={floorOff} alt={'floor lamp'} />
     } else if (this.state.appliance.floor === 'white') {
@@ -59,7 +86,7 @@ class Content extends React.Component<Props, State> {
     }
   }
 
-  renderDesk() {
+  renderDesk = () => {
     if (this.state.appliance.desk === 'off') {
       return <img src={deskOff} alt={'desk light'} />
     } else if (this.state.appliance.desk === 'white') {
@@ -79,6 +106,22 @@ class Content extends React.Component<Props, State> {
                 {this.renderDesk()}
                 {this.renderFloor()}
               </Grid>
+              <TextField
+                className={this.props.classes.formControl}
+                id="text-input"
+                label="Text Command"
+                margin="normal"
+                value={this.state.text.input}
+                onInput={this.handleTextInput()}
+                onKeyDown={this.handleKeyDown()}
+              />
+              <TextField
+                className={this.props.classes.formControl}
+                id="text-output"
+                label="Mikazuki anwsers"
+                margin="normal"
+                value={this.state.text.output}
+              />
             </Paper>
           </Grid>
         </Grid>
