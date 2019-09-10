@@ -226,7 +226,8 @@ class Content extends React.Component<Props, State> {
       default:
         this.setState({
           text: {
-            output: 'I do not understand your command, give me a clear one, thanks :)'
+            output:
+              'I do not understand your command, give me a clear one, thanks :)'
           }
         })
         break
