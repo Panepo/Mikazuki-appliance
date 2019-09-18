@@ -8,7 +8,7 @@ textRoutes.use(bodyparser.json())
 textRoutes.post('/analysis', (req, res) => {
   const message = req.body.text
   const caseAppliance = taskAppliance(message)
-  res.json({ anwser: caseAppliance })
+  res.json(caseAppliance)
 })
 
 export default textRoutes
