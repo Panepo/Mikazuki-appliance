@@ -24,7 +24,6 @@
     "prettier"
   ],
   "rules": {
-    "indent": [2, 2, {"SwitchCase": 1}],
     "keyword-spacing": 0,
     "brace-style": [2, "1tbs", { "allowSingleLine": true }],
     "comma-dangle": ["error", "only-multiline"],

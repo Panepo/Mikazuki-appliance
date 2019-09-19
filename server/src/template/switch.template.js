@@ -2,7 +2,7 @@ import { isKeyword } from '../helpers/keyword.helper'
 
 const templateOn = {
   cht: ['開'],
-  eng: ['on'],
+  eng: ['on', 'switch'],
   thre: 1
 }
 

@@ -12,5 +12,5 @@ export const checkTime = input => {
     return null
   }
   // new time in Taiwan epoch
-  return new Date(timeInfo.start.date().getTime() + 3600000 * 8)
+  return new Date(timeInfo.start.date().getTime())
 }

@@ -7,6 +7,7 @@ import { withStyles, withWidth } from '@material-ui/core'
 import { isSmartphone } from './helpers/responsive.helper'
 import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
 import axios from 'axios'
 
 import floorGreen from './images/floor-green.svg'
@@ -16,6 +17,11 @@ import deskGreen from './images/desk-green.svg'
 import deskWhite from './images/desk-white.svg'
 import deskOff from './images/desk-off.svg'
 
+import dayjs from 'dayjs'
+import 'dayjs/locale/zh-tw'
+// Days locale
+dayjs.locale('zh-tw')
+
 const styles = (theme: Object) => ({
   root: {
     flexGrow: 1,
@@ -23,7 +29,10 @@ const styles = (theme: Object) => ({
   },
   formControl: {
     margin: theme.spacing(1),
-    width: '95%'
+    width: '99%'
+  },
+  button: {
+    margin: theme.spacing(1)
   }
 })
 
@@ -64,6 +73,7 @@ class Content extends React.Component<Props, State> {
   handleTextInput = () => event => {
     this.setState({
       text: {
+        ...this.state.text,
         input: event.target.value
       }
     })
@@ -72,18 +82,49 @@ class Content extends React.Component<Props, State> {
   handleKeyDown = () => event => {
     if (event.key === 'Enter') {
       event.preventDefault()
-      const message = this.state.text.input
-      axios
-        .post('/text/analysis', { text: message })
-        .then(res => {
-          console.log(res.data.anwser)
-          this.handleAppliance(res.data.anwser)
-        })
-        .catch(err => console.log(err))
+      this.handleAppliance(this.state.text.input)
     }
   }
 
-  handleAppliance = caseAppliance => {
+  handleButton = text => event => {
+    this.setState({
+      text: {
+        ...this.state.text,
+        input: text
+      }
+    })
+    this.handleAppliance(text)
+  }
+
+  handleAppliance = message => {
+    axios
+      .post('/text/analysis', { text: message })
+      .then(res => {
+        if (res.data.time) {
+          const dateNow = new Date()
+          const dateNlp = new Date(res.data.time)
+          const timeNow = dateNow.getTime()
+          const timeNlp = dateNlp.getTime()
+          if (timeNow < timeNlp) {
+            this.handleApplianceFuture(res.data.anwser, dateNlp)
+          } else if (timeNow - timeNlp < 2000) {
+            this.handleApplianceNow(res.data.anwser)
+          } else {
+            this.setState({
+              text: {
+                ...this.state.text,
+                output: 'too bad that I do not have time travelling ability :('
+              }
+            })
+          }
+        } else {
+          this.handleApplianceNow(res.data.anwser)
+        }
+      })
+      .catch(err => console.log(err))
+  }
+
+  handleApplianceNow = caseAppliance => {
     switch (caseAppliance) {
       case 'all_on_white':
         this.setState({
@@ -92,6 +133,7 @@ class Content extends React.Component<Props, State> {
             desk: 'white'
           },
           text: {
+            ...this.state.text,
             output: 'Okay, all lights are swtich to white.'
           }
         })
@@ -103,6 +145,7 @@ class Content extends React.Component<Props, State> {
             desk: 'green'
           },
           text: {
+            ...this.state.text,
             output: 'Okay, all lights are swtich to green.'
           }
         })
@@ -114,6 +157,7 @@ class Content extends React.Component<Props, State> {
             desk: 'white'
           },
           text: {
+            ...this.state.text,
             output: 'Okay, all lights are turned on.'
           }
         })
@@ -127,6 +171,7 @@ class Content extends React.Component<Props, State> {
             desk: 'off'
           },
           text: {
+            ...this.state.text,
             output: 'Okay, all lights are turned off.'
           }
         })
@@ -138,6 +183,7 @@ class Content extends React.Component<Props, State> {
             desk: 'white'
           },
           text: {
+            ...this.state.text,
             output: 'Okay, desk light is switch to white.'
           }
         })
@@ -149,6 +195,7 @@ class Content extends React.Component<Props, State> {
             desk: 'green'
           },
           text: {
+            ...this.state.text,
             output: 'Okay, desk light is switch to green.'
           }
         })
@@ -160,6 +207,7 @@ class Content extends React.Component<Props, State> {
             desk: 'white'
           },
           text: {
+            ...this.state.text,
             output: 'Okay, desk light is turned on.'
           }
         })
@@ -173,6 +221,7 @@ class Content extends React.Component<Props, State> {
             desk: 'off'
           },
           text: {
+            ...this.state.text,
             output: 'Okay, desk light is turned off.'
           }
         })
@@ -184,6 +233,7 @@ class Content extends React.Component<Props, State> {
             floor: 'white'
           },
           text: {
+            ...this.state.text,
             output: 'Okay, floor lamp is switch to white.'
           }
         })
@@ -195,6 +245,7 @@ class Content extends React.Component<Props, State> {
             floor: 'green'
           },
           text: {
+            ...this.state.text,
             output: 'Okay, floor lamp is switch to green.'
           }
         })
@@ -206,6 +257,7 @@ class Content extends React.Component<Props, State> {
             floor: 'white'
           },
           text: {
+            ...this.state.text,
             output: 'Okay, floor lamp is turned on.'
           }
         })
@@ -219,6 +271,7 @@ class Content extends React.Component<Props, State> {
             floor: 'off'
           },
           text: {
+            ...this.state.text,
             output: 'Okay, floor lamp is turned off.'
           }
         })
@@ -226,6 +279,126 @@ class Content extends React.Component<Props, State> {
       default:
         this.setState({
           text: {
+            ...this.state.text,
+            output:
+              'I do not understand your command, give me a clear one, thanks :)'
+          }
+        })
+        break
+    }
+  }
+
+  handleApplianceFuture = (caseAppliance, date) => {
+    const dateTime = dayjs(date)
+      .locale('zh-tw')
+      .format()
+    switch (caseAppliance) {
+      case 'all_on_white':
+        this.setState({
+          text: {
+            ...this.state.text,
+            output: 'Okay, all lights are swtich to white at ' + dateTime
+          }
+        })
+        break
+      case 'all_on_green':
+        this.setState({
+          text: {
+            ...this.state.text,
+            output: 'Okay, all lights are swtich to green at ' + dateTime
+          }
+        })
+        break
+      case 'all_on_none':
+        this.setState({
+          text: {
+            ...this.state.text,
+            output: 'Okay, all lights are turned on at ' + dateTime
+          }
+        })
+        break
+      case 'all_off_white':
+      case 'all_off_green':
+      case 'all_off_none':
+        this.setState({
+          text: {
+            ...this.state.text,
+            output: 'Okay, all lights are turned off at ' + dateTime
+          }
+        })
+        break
+      case 'left_on_white':
+        this.setState({
+          text: {
+            ...this.state.text,
+            output: 'Okay, desk light is switch to white at ' + dateTime
+          }
+        })
+        break
+      case 'left_on_green':
+        this.setState({
+          text: {
+            ...this.state.text,
+            output: 'Okay, desk light is switch to green at ' + dateTime
+          }
+        })
+        break
+      case 'left_on_none':
+        this.setState({
+          text: {
+            ...this.state.text,
+            output: 'Okay, desk light is turned on at ' + dateTime
+          }
+        })
+        break
+      case 'left_off_white':
+      case 'left_off_green':
+      case 'left_off_none':
+        this.setState({
+          text: {
+            ...this.state.text,
+            output: 'Okay, desk light is turned off at ' + dateTime
+          }
+        })
+        break
+      case 'right_on_white':
+        this.setState({
+          text: {
+            ...this.state.text,
+            output: 'Okay, floor lamp is switch to white at ' + dateTime
+          }
+        })
+        break
+      case 'right_on_green':
+        this.setState({
+          text: {
+            ...this.state.text,
+            output: 'Okay, floor lamp is switch to green at ' + dateTime
+          }
+        })
+        break
+      case 'right_on_none':
+        this.setState({
+          text: {
+            ...this.state.text,
+            output: 'Okay, floor lamp is turned on at ' + dateTime
+          }
+        })
+        break
+      case 'right_off_white':
+      case 'right_off_green':
+      case 'right_off_none':
+        this.setState({
+          text: {
+            ...this.state.text,
+            output: 'Okay, floor lamp is turned off at ' + dateTime
+          }
+        })
+        break
+      default:
+        this.setState({
+          text: {
+            ...this.state.text,
             output:
               'I do not understand your command, give me a clear one, thanks :)'
           }
@@ -255,6 +428,29 @@ class Content extends React.Component<Props, State> {
   }
 
   render() {
+    const listCommand = [
+      'turn the right light on',
+      'switch all lights to green',
+      'turn on the left light',
+      'all on',
+      'switch floor lamp to green',
+      'turn the table light off',
+      'all lights off'
+    ]
+    const renderButton = listCommand.reduce((output: any[], data: string) => {
+      output.push(
+        <Button
+          color="primary"
+          className={this.props.classes.button}
+          variant="outlined"
+          key={data}
+          onClick={this.handleButton(data)}>
+          {data}
+        </Button>
+      )
+      return output
+    }, [])
+
     return (
       <main className={this.props.classes.root}>
         <Grid container={true} justify="center">
@@ -264,11 +460,13 @@ class Content extends React.Component<Props, State> {
                 {this.renderDesk()}
                 {this.renderFloor()}
               </Grid>
+              {renderButton}
               <TextField
                 className={this.props.classes.formControl}
                 id="text-input"
                 label="Your Command"
                 margin="normal"
+                variant="outlined"
                 value={this.state.text.input || ''}
                 onChange={this.handleTextInput()}
                 onKeyDown={this.handleKeyDown()}
@@ -278,6 +476,7 @@ class Content extends React.Component<Props, State> {
                 id="text-output"
                 label="Mikazuki anwsers"
                 margin="normal"
+                variant="outlined"
                 value={this.state.text.output || ''}
               />
             </Paper>
