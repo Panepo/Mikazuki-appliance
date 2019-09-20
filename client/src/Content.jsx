@@ -416,26 +416,6 @@ class Content extends React.Component<Props, State> {
   // ================================================================================
   // React render functions
   // ================================================================================
-  renderFloor = () => {
-    if (this.state.appliance.floor === 'off') {
-      return <img src={floorOff} alt={'floor lamp'} />
-    } else if (this.state.appliance.floor === 'white') {
-      return <img src={floorWhite} alt={'floor lamp'} />
-    } else if (this.state.appliance.floor === 'green') {
-      return <img src={floorGreen} alt={'floor lamp'} />
-    }
-  }
-
-  renderDesk = () => {
-    if (this.state.appliance.desk === 'off') {
-      return <img src={deskOff} alt={'desk light'} />
-    } else if (this.state.appliance.desk === 'white') {
-      return <img src={deskWhite} alt={'desk light'} />
-    } else if (this.state.appliance.desk === 'green') {
-      return <img src={deskGreen} alt={'desk light'} />
-    }
-  }
-
   render() {
     const listCommand = [
       'turn the right light on',
