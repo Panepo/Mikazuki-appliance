@@ -424,7 +424,9 @@ class Content extends React.Component<Props, State> {
       'all on',
       'switch floor lamp to green',
       'turn the table light off',
-      'all lights off'
+      'all lights off',
+      'turn the right light on tomorrow 10pm',
+      'turn the right light on yesterady 8am',
     ]
     const renderButton = listCommand.reduce((output: any[], data: string) => {
       output.push(
