@@ -70,6 +70,9 @@ class Content extends React.Component<Props, State> {
     this.handleKeyDown = this.handleKeyDown.bind(this)
   }
 
+  // ================================================================================
+  // React event handler functions
+  // ================================================================================
   handleTextInput = () => event => {
     this.setState({
       text: {
@@ -96,6 +99,9 @@ class Content extends React.Component<Props, State> {
     this.handleAppliance(text)
   }
 
+  // ================================================================================
+  // Appliance hanlder functions
+  // ================================================================================
   handleAppliance = message => {
     axios
       .post('/text/analysis', { text: message })
@@ -407,6 +413,9 @@ class Content extends React.Component<Props, State> {
     }
   }
 
+  // ================================================================================
+  // React render functions
+  // ================================================================================
   renderFloor = () => {
     if (this.state.appliance.floor === 'off') {
       return <img src={floorOff} alt={'floor lamp'} />
@@ -451,14 +460,43 @@ class Content extends React.Component<Props, State> {
       return output
     }, [])
 
+    let renderFloor, renderDesk
+    switch (this.state.appliance.floor) {
+      case 'off':
+        renderFloor = <img src={floorOff} alt={'floor lamp'} />
+        break
+      case 'white':
+        renderFloor = <img src={floorWhite} alt={'floor lamp'} />
+        break
+      case 'green':
+        renderFloor = <img src={floorGreen} alt={'floor lamp'} />
+        break
+      default:
+        break
+    }
+
+    switch (this.state.appliance.desk) {
+      case 'off':
+        renderDesk = <img src={deskOff} alt={'desk light'} />
+        break
+      case 'white':
+        renderDesk = <img src={deskWhite} alt={'desk light'} />
+        break
+      case 'green':
+        renderDesk = <img src={deskGreen} alt={'desk light'} />
+        break
+      default:
+        break
+    }
+
     return (
       <main className={this.props.classes.root}>
         <Grid container={true} justify="center">
           <Grid item={true} xs={isSmartphone(this.props.width) ? 4 : 8}>
             <Paper>
               <Grid container={true} justify="center">
-                {this.renderDesk()}
-                {this.renderFloor()}
+                {renderDesk}
+                {renderFloor}
               </Grid>
               {renderButton}
               <TextField
