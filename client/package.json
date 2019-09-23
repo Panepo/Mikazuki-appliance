@@ -5,7 +5,6 @@
   "main": "index.js",
   "private": true,
   "author": "Panepo <panepo@github.io>",
-  "homepage": "https://panepo.github.io/Mikazuki-appliance",
   "proxy": "http://localhost:3001",
   "repository": {
     "type": "git",

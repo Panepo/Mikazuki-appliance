@@ -16,7 +16,10 @@
     "prettier": "concurrently \"yarn prettier-server\" \"yarn prettier-client\"",
     "prettier-server": "cd server && yarn prettier",
     "prettier-client": "cd client && yarn prettier",
-    "precommit": "yarn prettier && git add"
+    "precommit": "yarn prettier && git add",
+    "install": "concurrently \"yarn install-server\" \"yarn install-client\"",
+    "install-server": "cd server && yarn",
+    "install-client": "cd client && yarn"
   },
   "lint-staged": {
     "*": [
