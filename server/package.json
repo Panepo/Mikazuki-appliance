@@ -13,6 +13,7 @@
   "scripts": {
     "test": "jest --config ./jest.config.json --forceExit --verbose false",
     "start": "SET NODE_ENV=development && nodemon src/index.js",
+    "prod": "NODE_ENV=production nodemon src/index.js",
     "lint": "eslint src/**/*.{js,jsx}",
     "prettier": "prettier --single-quote --no-semi --trailing-comma none --write \"src/**/*.{js,jsx}\""
   },
