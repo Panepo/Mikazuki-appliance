@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM node:10
 
 LABEL maintainer="Panepo <panepo@github.io>"
 
@@ -23,5 +23,11 @@ COPY ./server/. /usr/src/app
 ENV NODE_ENV production
 
 # Start server
+
+# Expose is NOT supported by Heroku
 EXPOSE 3001
-CMD [ "npm", "run", "prod" ]
+
+CMD NODE_ENV=production node src/index.js
+
+# CMD for Heroku deployment
+# CMD NODE_ENV=production PORT=$PORT nodemon src/index.js
