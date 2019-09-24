@@ -1,0 +1,6 @@
+{
+  "name": "mikazuki-appliance-docker",
+  "description": "Demo application for Mikazuki",
+  "image": "heroku/nodejs",
+  "addons": []
+}
