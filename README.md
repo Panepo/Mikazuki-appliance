@@ -1,9 +1,11 @@
 # [Mikazuki](https://github.com/Panepo/Mikazuki-appliance)
 
-[![Style Status][prettier-image]][prettier-url]
+[![Style Status][prettier-image]][prettier-url] ![docker pulls][docker-pull] ![docker stars][docker-star]
 
 [prettier-image]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg
 [prettier-url]: https://github.com/prettier/prettier
+[docker-pull]: https://img.shields.io/docker/pulls/panepo/mikazuki-appliance.svg
+[docker-star]: https://img.shields.io/docker/stars/panepo/mikazuki-appliance.svg
 
 An implementation of demo application of natural language understanding.
 
