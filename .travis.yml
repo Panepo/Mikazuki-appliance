@@ -10,7 +10,7 @@ script:
 - cd ..
 - cd server && yarn && yarn test-travis
 - cd ..
-- yarn test-combine && codecov
+- codecov
 branches:
   only:
   - master
