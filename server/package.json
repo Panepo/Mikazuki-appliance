@@ -12,6 +12,7 @@
   },
   "scripts": {
     "test": "SET NODE_ENV=test && jest --testTimeout=10000 --coverage",
+    "test-travis": "NODE_ENV=test jest --testTimeout=10000 --coverage",
     "start": "SET NODE_ENV=development && nodemon src/index.js",
     "lint": "eslint src/**/*.{js,jsx}",
     "prettier": "prettier --single-quote --no-semi --trailing-comma none --write \"src/**/*.{js,jsx}\""
