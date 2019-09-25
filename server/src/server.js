@@ -3,6 +3,8 @@ import 'regenerator-runtime/runtime'
 import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
+import compression from 'compression'
+import helmet from 'helmet'
 import textRoutes from './routes/text.route'
 
 const app = express()
@@ -11,6 +13,8 @@ const app = express()
 if (process.env.NODE_ENV !== 'production') app.use(cors())
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
 app.use(bodyParser.json({ limit: '50mb', extended: true }))
+app.use(compression()) // Compress all routes
+app.use(helmet())
 
 // routes
 app.use('/text', textRoutes)
@@ -22,15 +26,17 @@ app.use(express.static('./static'))
 let startApp = process.env.NODE_ENV != 'test'
 if (process.env.NODE_ENV == 'test' && !module.parent) startApp = true
 
+const port = process.env.PORT || 3001
+
 if (startApp) {
-  app.listen(3001, () => {
+  app.listen(port, () => {
     if (!process.env.NODE_ENV) {
       console.error(`[ERROR] > No environment !! Server will not start`)
       process.exit(0)
       return
     }
 
-    console.info('[INFO] > Listening on port 3001...')
+    console.info(`[INFO] Listening on port ${port} ...`)
     console.info(`[INFO] > Current environment is => ${process.env.NODE_ENV}`)
   })
 }
