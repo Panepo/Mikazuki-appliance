@@ -7,7 +7,9 @@ install:
 - yarn
 script:
 - cd client && yarn && yarn test
+- cd ..
 - cd server && yarn && yarn test
+- cd ..
 - yarn test-combine && codecov
 branches:
   only:
