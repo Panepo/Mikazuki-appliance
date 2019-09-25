@@ -6,7 +6,6 @@ describe('Task >> Appliance test', () => {
     let anwser = { anwser: 'right_on_none', time: null }
     expect(taskAppliance(input)).toEqual(anwser)
 
-
     input = 'switch all lights to green'
     anwser = { anwser: 'all_on_green', time: null }
     expect(taskAppliance(input)).toEqual(anwser)
