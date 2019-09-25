@@ -16,9 +16,6 @@
     "lint": "eslint src/**/*.{js,jsx}",
     "prettier": "prettier --single-quote --no-semi --trailing-comma none --write \"src/**/*.{js,jsx}\""
   },
-  "engines": {
-    "node": "10.16.2"
-  },
   "dependencies": {
     "body-parser": "^1.19.0",
     "chinese-conv": "^1.0.1",
