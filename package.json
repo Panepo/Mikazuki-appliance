@@ -19,7 +19,11 @@
     "precommit": "yarn prettier && git add",
     "install": "concurrently \"yarn install-server\" \"yarn install-client\"",
     "install-server": "cd server && yarn",
-    "install-client": "cd client && yarn"
+    "install-client": "cd client && yarn",
+    "test": "concurrently \"yarn test-server\" \"yarn test-client\"",
+    "test-server": "cd server && yarn test",
+    "test-client": "cd client && yarn test",
+    "test-combine": "istanbul-combine -r lcov ./client/coverage/coverage-final.json ./server/coverage/coverage-final.json /coverage/*.json"
   },
   "lint-staged": {
     "*": [
@@ -28,8 +32,10 @@
     ]
   },
   "devDependencies": {
+    "codecov": "^3.6.1",
     "concurrently": "^4.1.1",
     "husky": "^3.0.3",
+    "istanbul-combine": "^0.3.0",
     "lint-staged": "^9.2.1"
   }
 }

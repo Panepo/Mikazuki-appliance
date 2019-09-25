@@ -3,7 +3,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import { environment } from './environment'
+import { environment } from '../environment'
 
 const styles = (theme: Object) => ({
   root: {

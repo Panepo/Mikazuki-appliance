@@ -1,11 +1,13 @@
 # [Mikazuki](https://github.com/Panepo/Mikazuki-appliance)
 
-[![Style Status][prettier-image]][prettier-url] ![docker pulls][docker-pull] ![docker stars][docker-star]
+[![Build Status][travis-image]][travis-url] [![Style Status][prettier-image]][prettier-url] ![docker pulls][docker-pull] ![docker stars][docker-star]
 
+[travis-image]: https://travis-ci.org/Panepo/Mikazuki-appliance.svg
+[travis-url]: https://travis-ci.org/Panepo/Mikazuki-appliance.svg?branch=master
 [prettier-image]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg
 [prettier-url]: https://github.com/prettier/prettier
-[docker-pull]: https://img.shields.io/docker/pulls/panepo/mikazuki-appliance.svg
-[docker-star]: https://img.shields.io/docker/stars/panepo/mikazuki-appliance.svg
+[docker-pull]: https://img.shields.io/docker/pulls/panepo/Mikazuki-appliance.svg
+[docker-star]: https://img.shields.io/docker/stars/panepo/Mikazuki-appliance.svg
 
 An implementation of demo application of natural language understanding.
 

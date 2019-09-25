@@ -11,7 +11,7 @@
     "url": "git+https://github.com/Panepo/Mikazuki-appliance.git"
   },
   "scripts": {
-    "test": "jest --config ./jest.config.json --forceExit --verbose false",
+    "test": "SET NODE_ENV=test && jest --testTimeout=10000 --coverage",
     "start": "SET NODE_ENV=development && nodemon src/index.js",
     "lint": "eslint src/**/*.{js,jsx}",
     "prettier": "prettier --single-quote --no-semi --trailing-comma none --write \"src/**/*.{js,jsx}\""
@@ -39,14 +39,22 @@
     "eslint-config-google": "^0.12.0",
     "eslint-config-prettier": "^4.1.0",
     "eslint-plugin-prettier": "^3.0.1",
+    "jest": "^24.9.0",
     "nodemon": "^1.18.10",
-    "prettier": "^1.16.4"
+    "prettier": "^1.16.4",
+    "supertest": "^4.0.2"
   },
   "nodemonConfig": {
     "ignore": [
       "test/*",
       "docs/*",
       "src/clinet/*"
+    ]
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
     ]
   }
 }

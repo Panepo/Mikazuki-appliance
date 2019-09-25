@@ -4,10 +4,10 @@ import * as React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import withRoot from './withRoot'
-import Header from './Header'
-import Ribbon from './Ribbon'
-import Content from './Content'
-import Footer from './Footer'
+import Header from './pages/Header'
+import Ribbon from './pages/Ribbon'
+import Content from './pages/Content'
+import Footer from './pages/Footer'
 
 const styles = (theme: Object) => ({
   root: {

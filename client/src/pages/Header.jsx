@@ -14,9 +14,9 @@ import ListItemText from '@material-ui/core/ListItemText'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import IconBookmark from '@material-ui/icons/Bookmarks'
 import Typography from '@material-ui/core/Typography'
-import { linkDrawer } from './constants/link.constant'
-import type { LinkSite } from './models/misc.model'
-import { environment } from './environment'
+import { linkDrawer } from '../constants/link.constant'
+import type { LinkSite } from '../models/misc.model'
+import { environment } from '../environment'
 
 const styles = (theme: Object) => ({
   root: {},

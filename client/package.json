@@ -39,6 +39,8 @@
     "typeface-roboto": "^0.0.75"
   },
   "devDependencies": {
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
     "eslint-config-prettier": "^6.2.0",
     "eslint-plugin-prettier": "^3.1.0",
     "flow-bin": "^0.107.0",

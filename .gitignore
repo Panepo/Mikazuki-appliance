@@ -30,3 +30,4 @@ flow-typed
 node_modules
 build
 static
+coverage
