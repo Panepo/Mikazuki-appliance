@@ -37,7 +37,7 @@ if (startApp) {
     }
 
     console.info(`[INFO] Listening on port ${port} ...`)
-    console.info(`[INFO] > Current environment is => ${process.env.NODE_ENV}`)
+    console.info(`[INFO] Current environment is => ${process.env.NODE_ENV}`)
   })
 }
 
