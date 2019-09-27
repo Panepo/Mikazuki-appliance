@@ -41,8 +41,9 @@ One of the usage of natural language understanding is smart appliance. In this d
 ## Develop
 
 ### Development Requirements
-* node `^10.16.2`
+* node `^10.16.0`
 * yarn `^1.16.0`
+* docker `^2.1.0`
 
 ### Getting Start
 
@@ -68,8 +69,24 @@ $ yarn start
 
 |`yarn <script>`       |Description|
 |-------------------|-----------|
-|`start`            |Serves your app at `localhost:3000`|
+|`start`            |Serves both client and server|
+|`client`           |Serves client at `localhost:3000`|
+|`server`           |Serves server at `localhost:3001`|
+|`lint`             |Lint code in ./cleint and ./server|
 |`prettier`         |Prettier code in ./cleint and ./server|
+|`test`             |Perform unit test on both client and server|
+
+### Running on Docker locally
+
+1. Clone per-built docker image
+```
+$ docker pull panepo/mikazuki-appliance
+```
+
+2. Running docker image with port connect to 8080
+```
+docker run -p 8080:3001 panepo/mikazuki-appliance
+```
 
 ## Author
 

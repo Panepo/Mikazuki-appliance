@@ -13,5 +13,13 @@ describe('Task >> Appliance test', () => {
     input = 'all lights off'
     anwser = { anwser: 'all_off_none', time: null }
     expect(taskAppliance(input)).toEqual(anwser)
+
+    input = 'turn the table light off'
+    anwser = { anwser: 'left_off_none', time: null }
+    expect(taskAppliance(input)).toEqual(anwser)
+
+    input = '左邊的燈打開'
+    anwser = { anwser: 'left_on_none', time: null }
+    expect(taskAppliance(input)).toEqual(anwser)
   })
 })

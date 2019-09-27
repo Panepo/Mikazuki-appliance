@@ -16,7 +16,7 @@
   "overrides": [
     {
       "files": [ "*.js", "**/*.js" ],
-      "excludedFiles": ["*.min.js", "./**/*/*.test.js"]
+      "excludedFiles": ["*.min.js", "*.test.js"]
     }
   ],
   "extends": ["eslint:recommended", "google", "prettier"],

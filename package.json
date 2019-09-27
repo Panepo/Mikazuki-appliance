@@ -9,7 +9,6 @@
     "start": "concurrently \"yarn server\" \"yarn client\"",
     "server": "cd server && yarn start",
     "client": "cd client && yarn start",
-    "database": "mongod --dbpath=./db --smallfiles",
     "lint": "concurrently \"yarn lint-server\" \"yarn lint-client\"",
     "lint-server": "cd server && yarn lint",
     "lint-client": "cd client && yarn lint",
