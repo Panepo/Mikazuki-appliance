@@ -31,3 +31,8 @@ node_modules
 build
 static
 coverage
+
+# python
+__pycache__/
+*.py[cod]
+*$py.class
