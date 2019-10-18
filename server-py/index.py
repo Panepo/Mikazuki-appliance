@@ -1,12 +1,10 @@
-from flask_script import Manager, Server
-from server import app
+# -*- coding: utf-8 -*-
+"""Create an application instance."""
+from flask.helpers import get_debug_flag
 
-manager = Manager(app)
-manager.add_command('runserver', Server())
+from src.app import create_app
+from src.config import DevConfig, ProdConfig
 
-@manager.shell
-def make_shell_context():
-    return dict(app=app)
+CONFIG = DevConfig if get_debug_flag() else ProdConfig
 
-if __name__ == '__main__':
-    manager.run()
+app = create_app(CONFIG)
