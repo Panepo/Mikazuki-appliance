@@ -7,6 +7,7 @@ from .serializers import text_schema
 
 blueprint = Blueprint('text', __name__)
 
+
 @blueprint.route('/text/analysis', methods=('POST',))
 @marshal_with(text_schema)
 def text_analysus():
