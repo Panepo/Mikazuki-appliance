@@ -2,9 +2,9 @@
 
 from flask import Blueprint, send_from_directory
 
-blueprint = Blueprint('static', __name__)
+blueprint = Blueprint("static", __name__)
 
-@blueprint.route('/')
+
+@blueprint.route("/")
 def static_serving():
-    print("fq")
-    return send_from_directory('static', 'index.html')
+    return send_from_directory("static", "index.html")

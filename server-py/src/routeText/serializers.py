@@ -1,5 +1,6 @@
 from marshmallow import Schema, fields
 
+
 class textSchema(Schema):
     text = fields.Str()
 
