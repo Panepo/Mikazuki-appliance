@@ -4,6 +4,7 @@ from flask import Blueprint, jsonify, request
 from flask_apispec import marshal_with
 
 from .serializers import text_schema
+from .appliance import taskAppliance
 
 blueprint = Blueprint("text", __name__)
 
@@ -12,5 +13,6 @@ blueprint = Blueprint("text", __name__)
 @marshal_with(text_schema)
 def text_analysus():
     request_data = request.get_json()
-    print(request_data["text"])
-    return jsonify({"anwser": "all_on_white"})
+    task = taskAppliance(request_data["text"])
+    print(task)
+    return jsonify({"anwser": task})
