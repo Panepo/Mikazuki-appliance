@@ -26,7 +26,7 @@ def isKeyword(tokens, template):
         if token["tag"] in "eng":
             for keyword in template["eng"]:
                 distance = jaro_winkler_similarity(token["word"], keyword)
-                if distance > template["threshold"]:
+                if distance >= template["threshold"]:
                     result = True
         else:
             for keyword in template["cht"]:
