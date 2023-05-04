@@ -24,7 +24,7 @@
     "compression": "^1.7.4",
     "core-js": "^3.2.1",
     "cors": "^2.8.5",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "helmet": "^3.21.1",
     "natural": "^0.6.3",
     "nodejieba": "^2.3.1",
